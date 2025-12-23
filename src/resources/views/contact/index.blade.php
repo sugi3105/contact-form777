@@ -4,7 +4,7 @@
 <div class="contact">
     <h2 class="contact__title">Contact</h2>
 
-    <form class="form" action="contacts/confirm" method="post"
+    <form class="form" action="contacts/confirm" method="post">
     @csrf
 <div class="form__group">
         <label>お名前<span> </span></label>
@@ -17,14 +17,14 @@
 <div class="form__group">
         <label>性別<span> </span></label>
         <label>
-        <input type="radio" name="gender" value="1" {{ old('gender') =='1' ? 'checked' : '' }}>
+        <input type="radio" name="gender" value="1" {{ old('gender') == '1' ? 'checked' : '' }}>
         男性
         </label>
         <label>
-        <input type="radio" name="gender" value="2" {{ old('gender') =='2' ? 'checked' : '' }}>
+        <input type="radio" name="gender" value="2" {{ old('gender') == '2' ? 'checked' : '' }}>
         女性
         </label>
-        <input type="radio" name="gender" value="3" {{ old('gender') =='3' ? 'checked' : '' }}>
+        <input type="radio" name="gender" value="3" {{ old('gender') == '3' ? 'checked' : '' }}>
         その他
         </label>
 </div>
@@ -53,7 +53,7 @@
         <option value="">選択してください。</option>
         @foreach ($categories as $category)
         <option value="{{ $category->id }}"
-        {{ old('category_id') ==$category->id ? 'selected' : '' }}>
+        {{ old('category_id') == $category->id ? 'selected' : '' }}>
         {{ $category->content}}
         </option>
         @endforeach
