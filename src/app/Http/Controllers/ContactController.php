@@ -9,26 +9,28 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $categorues = Category::all();
+        $categories = Category::all();
         return view('contact.index', compact('categories'));
     }
-    public function confirm(Request $request)
+    public function confirm(ContactRequest $request)
     {
+       
          $contact = $request->all();
-         $catagory = Category::find($request->category_id);
+         $category = Category::find($request->category_id);
         return view('contact.confirm', compact('contact', 'category'));
     }
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        //Contact::create($request->all());
+       
         Contact::create([
             'category_id' => $request->category_id,
             'name' => $request->name,
             'gender' => $request->gender,
             'email' => $request->email,
+            'tel' => $request->tel,
             'postcode' => $request->postcode,
             'address' => $request->address,
-            'buildling' => $request->buildling_name,
+            'building' => $request->building_name,
             'detail' => $request->detail,
         ]);
         return view('contact.thanks');

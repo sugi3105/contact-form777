@@ -17,14 +17,14 @@
 <div class="form__group">
         <label>性別<span> </span></label>
         <label>
-        <input type="radio" name="gender" value="1" {{ old('gender') == '1' ? 'checked' : '' }}>
+        <input type="radio" name="gender" value="1" @checked(old('gender') == '1' )>
         男性
         </label>
         <label>
-        <input type="radio" name="gender" value="2" {{ old('gender') == '2' ? 'checked' : '' }}>
+        <input type="radio" name="gender" value="2" @checked(old('gender') == '2' )>
         女性
         </label>
-        <input type="radio" name="gender" value="3" {{ old('gender') == '3' ? 'checked' : '' }}>
+        <input type="radio" name="gender" value="3" @checked(old('gender') == '3' )>
         その他
         </label>
 </div>
@@ -35,6 +35,11 @@
         @error('email')
         {{ $message }}
         @enderror
+</div>
+
+<div class="form__group">
+    <label>電話番号<span> </span></label>
+        <input type="text" name="tel" value="{{ old('tel') }}">
 </div>
 
 <div class="form__group">
