@@ -11,6 +11,7 @@ class Contact extends Model
     protected $fillable = [
         'category_id',
         'name',
+        'email',
         'gender',
         'tel',
         'postcode',
@@ -18,4 +19,9 @@ class Contact extends Model
         'building',
         'detail',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

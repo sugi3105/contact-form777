@@ -17,8 +17,18 @@ use App\Http\Controllers\AdminController;
 
 //Route::get('/', function () {
     //return 'root ok';
-Route::get('/', [ContactController::class, 'index']);
-Route::post('/confirm', [ContactController::class, 'confirm']);
-Route::post('/thanks', [ContactController::class, 'store']);
-Route::get('/admin', [ContactController::class, 'admin']);
+Route::get('/', [ContactController::class, 'index'])
+   ->name('contact.index');
+Route::post('contact/confirm', [ContactController::class, 'confirm'])
+   ->name('contact.confirm');
+Route::post('contact/thanks', [ContactController::class, 'thanks'])
+   ->name('contact.thanks');
+Route::get('/admin', [AdminController::class, 'index'])
+   ->name('admin.index');
+//Route::get('admin/search', [AdminController::class, 'search'])
+   //->name('admin.search');
+Route::post('admin/delete', [AdminController::class, 'destroy'])
+   ->name('admin.delete');
+//Route::get('admin/export', [AdminController::class, 'export'])
+   //->name('admin.export');
 //});

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Contact;
+use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
@@ -14,25 +16,30 @@ class ContactController extends Controller
     }
     public function confirm(ContactRequest $request)
     {
+         $data = $request->validated();
        
-         $contact = $request->all();
-         $category = Category::find($request->category_id);
-        return view('contact.confirm', compact('contact', 'category'));
+         //$contact = $request->all();
+         //$category = Category::find($data['category_id']);
+        return view('contact.confirm', compact('data'));
     }
-    public function store(ContactRequest $request)
+    public function thanks(Request $request)
     {
+        //$data = $request->validate();
+          $data = $request->all();
+          unset($data['_token']);
        
-        Contact::create([
-            'category_id' => $request->category_id,
-            'name' => $request->name,
-            'gender' => $request->gender,
-            'email' => $request->email,
-            'tel' => $request->tel,
-            'postcode' => $request->postcode,
-            'address' => $request->address,
-            'building' => $request->building_name,
-            'detail' => $request->detail,
-        ]);
+        Contact::create($data);
+            //'category_id' => $data['category_id'],
+            //'name' => $data['name'],
+            //'gender' => $data['gender'],
+            //'email' => $data['email'],
+            //'tel' => $data['tel'],
+            //'postcode' => $data['postcode'],
+            //'address' => $data['address'],
+            //'building' => $data['building'],
+            //'detail' => $data['detail'],
+        //]);
+    
         return view('contact.thanks');
     }
     public function admin()

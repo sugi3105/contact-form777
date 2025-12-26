@@ -1,77 +1,78 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
-<div class="confirm">
-    <h2 class="confirm__title">Confirm</h2>
+<div class="confirm__content">
+<div class="confirm__heading">
+    <h2>お問い合わせ内容の確認</h2>
 
-    <form class="form" action="/contact/store" method="post">
+    <form class="form" action="{{ route('contact.thanks') }}" method="post">
         @csrf
 
         <div class="confirm__group">
-            <p class="confirm__lavel">お名前</p>
-            <p class="confirm__value">{{ $contact['name'] }}</p>
-            <input type="hidden" name="name" value="{{ $contact['name']  }}">
+            <lavel>お名前</lavel>
+            <p>{{ $data['name'] }}</p>
+            <input type="hidden" name="name" value="{{ $data['name'] }}">
+            
         </div>
         <div class="confirm__group">
-            <p class="confirm__lavel">性別</p>
-            <p class="confirm__value">
-                @if ($contact['gender'] == 1) 男性
-                @elself ($contact['gender'] == 2) 女性
+            <lavel>性別</lavel>
+            <p>
+                @if ($data['gender'] == 1) 男性
+                @elself ($data['gender'] == 2) 女性
                 @else その他
                 @endif
             </p>
-            <input type="hidden" name="gender" value="{{ $content['gender'] }}">
+            <input type="hidden" name="gender" value="{{ $data['gender'] }}">
         </div>
 
         <div class="confirm__group">
-            <p class="confirm__lavel">メールアドレス</p>
-            <p class="confirm__value">{{ $contact['email'] }}</p>
-            <input type="hidden" name="email" value="{{ $contact['email']  }}">
+            <lavel>メールアドレス</lavel>
+            <p>{{ $data['email'] }}</p>
+            <input type="hidden" name="email" value="{{ $data['email'] }}">
         </div>
 
         <div class="confirm__group">
-            <p class="confirm__lavel">電話番号</p>
-            <p class="confirm__value">{{ $contact['tel'] }}</p>
-            <input type="hidden" name="tel" value="{{ $contact['tel']  }}">
+            <lavel> 電話番号</lavel>
+            <p>{{ $data['tel'] }}</p>
+            <input type="hidden" name="tel" value="{{ $data['tel'] }}">
+        </div>
+        
+        <div class="confirm__group">
+            <lavel>郵便番号</lavel>
+            <p>{{ $data['postcode'] }}</p>  
+              <input type="hidden" name="postcode" value="{{ $data['postcode'] }}">
         </div>
 
         <div class="confirm__group">
-            <p class="confirm__lavel">郵便番号</p>
-            <p class="confirm__value">{{ $contact['postcode'] }}</p>
-            <input type="hidden" name="postcode" value="{{ $contact['postcode']  }}">
+            <lavel>住所</lavel>
+            <p>{{ $data['address'] }}</p>
+            <input type="hidden" name="address" value="{{ $data['address'] }}">
         </div>
 
         <div class="confirm__group">
-            <p class="confirm__lavel">住所</p>
-            <p class="confirm__value">{{ $contact['address'] }}</p>
-            <input type="hidden" name="address" value="{{ $contact['address']  }}">
+            <lavel>建物名</lavel>
+            <p>{{ $data['building'] }}</p>
+            <input type="hidden" name="building" value="{{ $data['building'] }}">
         </div>
 
         <div class="confirm__group">
-            <p class="confirm__lavel">建物名</p>
-            <p class="confirm__value">{{ $contact['building_name'] }}</p>
-            <input type="hidden" name="building_name" value="{{ $contact['building_name']  }}">
+            <lavel>お問い合わせの種類</lavel>
+            <p>{{ $data['category_id'] }}</p>
+            <input type="hidden" name="category_id" value="{{  $data['category_id'] }}">
         </div>
 
         <div class="confirm__group">
-            <p class="confirm__lavel">お問い合わせの種類</p>
-            <p class="confirm__value">{{ $category->content'] }}</p>
-            <input type="hidden" name="category_id" value="{{ $contact['category_id']  }}">
+            <lavel>お問い合わせの内容</lavel>
+            <p>{{ $data['detail'] }}</p>
+            <input type="hidden" name="detail" value="{{ $data['detail'] }}">
         </div>
-
-        <div class="confirm__group">
-            <p class="confirm__lavel">お問い合わせ内容</p>
-            <p class="confirm__value">{{ $contact['detail'] }}</p>
-            <input type="hidden" name="detail" value="{{ $contact['detail']  }}">
-        </div>
-
-        <div class="confirm__button">
-            <button type="submit">送信</button>
+        <div class="confirm-bittons">
+            <button type="submit"class="submit-btn">送信</button>
         </div>
     </form>
 
-    <form class="form" action="/contact/index" method="get">
-        <button type="submit">修正</button>
+    <form class="form" action="{{ route('contact.index') }}" method="get">
+        <button type="submit"class="back-btn>修正</button>
     </form>
 </div>
 @endsection

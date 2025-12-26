@@ -10,15 +10,27 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $contacts = Contact::with('category')
-           ->KeywordSearch($request->keyword)
-           ->GenderSearch($request->gender)
-           ->CategorySearch($request->category_id)
-           ->DateSearch($request->date)
-           ->paginate(7);
+        $query = Contact::query();
 
-           $categories = Category::all();
-   
+        if ($request->filled('name')){
+            $query->where('name', 'like', '%'. $request->name . '%');
+        }
+
+        if ($request->filled('email' )){
+            $query->where('email', 'like', '%'. $request->email . '%');
+        }
+
+        if ($request->filled('gender')){
+            $query->where('gender',  $request->gender);
+        }
+        
+        if ($request->filled('category_id')){
+            $query->where('category_id',  $request->category_id);
+        }
+        
+        $contacts = $query->with('category_id')->paginate(10);
+        $categories = Category::all();
+        
     
     return view('admin.index', compact('contacts', 'categories'));
     }
@@ -28,7 +40,7 @@ class AdminController extends Controller
         return redirect()->route('admin.index');
     }
 }
-
+        
 
     //
-}
+

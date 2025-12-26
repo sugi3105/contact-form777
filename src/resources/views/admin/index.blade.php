@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="admin">
-    <h2 class="admin__title">Admin</h2>
+    <h2>管理画面</h2>
 
-    <form action="{{ route('admin.index') }}" method="GET" class="admin__search">
+    <form class="search-form" action="{{ route('admin.search') }}" method="GET"> 
       <input type="text" name="keyword" placeholder="名前.メール検索" value="{{ request('keyword') }}">
       
       <select name="gender">
@@ -14,21 +14,10 @@
          <option value="3" @selected(request('gender')=='3')>その他</option>
       </select>
 
-      <select name="category_id>
-        <option value=">種類</option>
-        @foreach ($categories as $category)
-         <option value="{{ $Category->id }}"
-         @selected(request('category_id')==$category->id)>
-         {{ $category->content }}
-         </option>
-         @endforeach
-      </select>
-
-      <input type="date" name"date" value="{{ request('date') }}">
-
       <button type="submit">検索</button>
-      <a href="{{ route('admin.index') }}">リセット</a>
     </form>
+    <div class="export">
+      <a href="{{ route('admin.export') }}"CSV出力</a>
 
     <table class="admin__table">
       <tr>
@@ -37,8 +26,8 @@
          <th>性別</th>
          <th>メール</th>
          <th>電話番号</th>
-         <th>種類</th>
-         <th></th>
+         <th>お問い合わせの内容</th>
+         <th>操作</th>
       </tr>
 
       @foreach ($contacts as $contact)
@@ -53,12 +42,12 @@
          </td>
          <td>{{ $contact->email }}</td>
          <td>{{ $contact->tel }}</td>
-         <td>{{ $contact->category->content }}</td>
+         <td>{{ $contact->detail }}</td>
          <td>
-            <form action="{{ route('admin.destroy', $contact->id }}" method="POST">
+            <form action="{{ route('admin.delete' }}" method="POST">
                @csrf
-               @method('DELETE')
-               <button>削除</button>
+               <input type="hidden" name="id" value="{{ $contact->id }}">
+               <button type="submit">削除</button>
             </form>
          </td>
       </tr>
