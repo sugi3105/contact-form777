@@ -25,10 +25,10 @@ Route::post('contact/thanks', [ContactController::class, 'thanks'])
    ->name('contact.thanks');
 Route::get('/admin', [AdminController::class, 'index'])
    ->name('admin.index');
-//Route::get('admin/search', [AdminController::class, 'search'])
-   //->name('admin.search');
+Route::get('admin/search', [AdminController::class, 'search'])
+   ->name('admin.search');
 Route::post('admin/delete', [AdminController::class, 'destroy'])
    ->name('admin.delete');
-//Route::get('admin/export', [AdminController::class, 'export'])
-   //->name('admin.export');
-//});
+Route::get('admin/export', [AdminController::class, 'export'])
+   ->name('admin.export');
+   //});
